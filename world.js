@@ -1,9 +1,12 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
-	let searchButton = document.getElementById("lookup");
-	searchButton.addEventListener('click', loadXMLDoc);
+	let searchButton1 = document.getElementById("lookupCount");
+	searchButton1.addEventListener('click', loadXMLDoc1);
+	let searchButton2 = document.getElementById("lookupCit");
+	searchButton2.addEventListener('click', loadXMLDoc2);
 })
-function loadXMLDoc() {
+
+function loadXMLDoc1() {
 	let country = useless();
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -13,7 +16,22 @@ function loadXMLDoc() {
 			document.getElementById("result").innerHTML = result;
 		}
 	};
-	xhttp.open("GET", "./world.php"+"?"+"country="+country, true);
+	xhttp.open("GET", "./world.php"+"?"+"country="+country+"&context=nul", true);
+	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+	xhttp.send(null);
+ }
+ 
+ function loadXMLDoc2() {
+	let country = useless();
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var result = this.responseText;
+			alert(this.responseText);
+			document.getElementById("result").innerHTML = result;
+		}
+	};
+	xhttp.open("GET", "./world.php"+"?"+"country="+country+"&context=cities", true);
 	xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 	xhttp.send(null);
  }
